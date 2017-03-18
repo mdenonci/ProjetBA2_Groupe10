@@ -110,7 +110,9 @@ def measure_to_pixelvalue(measure_list, p_level):
     
 def iradon(sinogram,filter_used):
     '''
-    Fonction de Retroprojection
+    Fonction de Retroprojection : contient des morceaux du code de la fonction iradon
+    de la libraire de scikit-image (skimage) :
+    https://github.com/scikit-image/scikit-image/blob/master/skimage/transform/radon_transform.py
     '''
     # Definition des Valeurs Necessaires
     th = (np.pi / 180.0) * theta                                                            
@@ -232,11 +234,8 @@ print("CONVERSION DES DONNEES TERMINEE")
 
 # ETAPE 3 : Creation d'un Array de dimensions souhaitees = Array de Sinogramme  , Conversion en image et affichage
 tab_color = make_array(liste_color, n_th, n_rh)
-
 tab_color = correct_sinogram(tab_color)
 
-plt.plot(np.arange(n_rh),(tab_color[0:n_rh]))
-plt.show()
 
 sinogram_img = img.fromarray(tab_color)
 print("SINOGRAMME CREE")
@@ -252,9 +251,6 @@ down_pixel_transition = find_down_limit(tab_color)
 
 up_pixel_transition = correct_artefact(up_pixel_transition, artefact_tolerance)
 down_pixel_transition = correct_artefact(down_pixel_transition, artefact_tolerance)
-
-print(up_pixel_transition)
-print(down_pixel_transition)
 
 minimal_up = up_pixel_transition[0]
 for upix in up_pixel_transition:
